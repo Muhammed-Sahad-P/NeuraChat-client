@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function VerifyEmail() {
     const [email, setEmail] = useState("");
@@ -100,9 +101,9 @@ export default function VerifyEmail() {
 
                     <p className="mt-6 text-sm text-gray-600 dark:text-gray-400 text-center">
                         Already verified?{" "}
-                        <a href="/login" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
+                        <Link href="/login" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
                             Sign in
-                        </a>
+                        </Link>
                     </p>
                 </form>
             </div>
