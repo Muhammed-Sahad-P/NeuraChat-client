@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import Head from "next/head";
 import ChatSidebar from "@/components/chat/ChatSidebar";
 import ChatMain from "@/components/chat/ChatSection";
 import ChatWelcome from "@/components/chat/ChatWelcome";
 import type { Chat, Message } from "@/types/chat";
 
 export default function Chat() {
+
   const [activeChat, setActiveChat] = useState<number | null>(null);
 
   const initialChats: Chat[] = [
@@ -114,12 +114,6 @@ export default function Chat() {
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
-      <Head>
-        <title>NeuraChat</title>
-        <meta name="description" content="A modern chat application" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div className="flex flex-col md:flex-row h-full">
         <ChatSidebar
           chats={initialChats}

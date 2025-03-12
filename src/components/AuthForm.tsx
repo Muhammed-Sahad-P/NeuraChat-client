@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Props = {
     type: "login" | "register";
@@ -18,7 +19,9 @@ export default function AuthForm({ type }: Props) {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (type === "login") {
-            loginMutation.mutate({ email, password }, { onSuccess: () => router.push("/dashboard") });
+            loginMutation.mutate({ email, password }, {
+                onSuccess: (userData) => router.push(`/@${encodeURIComponent(userData.name)}`),
+            });
         } else {
             registerMutation.mutate({ name, email, password }, { onSuccess: () => router.push("/verify-email") });
         }
@@ -88,17 +91,17 @@ export default function AuthForm({ type }: Props) {
                 {type === "login" ? (
                     <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
                         Don&apos;t have an account?{" "}
-                        <a href="/register" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
+                        <Link href="/register" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
                             Sign up
-                        </a>
+                        </Link>
                     </p>
                 ) : (
                     <div>
                         <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
                             Already have an account?{" "}
-                            <a href="/login" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
+                            <Link href="/login" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
                                 Sign in
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 )}
